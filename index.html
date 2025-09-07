@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="view-transition" content="same-origin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" type="" href="logos/favicon.png">
+  <title>Phani's Portfolio</title>
+</head>
+<body>
+    
+  <header>
+    <a href="index.html" class="logo">Phani Vishnu Addepalli</a>
+
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="education.html">Education</a>
+      <a href="experience.html">Experience</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-toggle">&#9776;</button> 
+  </header>
+
+  <section class="home">
+    <div class="home-img">
+      <img src="usa22.jpg" alt="Profile Picture">
+    </div>
+    <div class="home-content">
+      <h1>Hello world, my name is <span>Phani</span></h1>
+      <!-- ✅ typing line moved to its own block -->
+      <div class="typing-text"><span></span></div>
+      <br>
+      <br>
+      <br>
+<p>I'm a <strong>Washington, DC-based Data Analyst</strong> with expertise in <strong>Data Visualization</strong>, <strong>Machine Learning</strong>, and <strong>Cloud Platforms</strong>. I specialize in transforming complex datasets into actionable insights by building <strong>scalable ETL pipelines</strong>, <strong>interactive dashboards</strong>, and <strong>predictive models</strong>. Skilled in <strong>Python</strong>, <strong>SQL</strong>, <strong>Power BI</strong>, <strong>Tableau</strong>, <strong>Google Cloud Platform (GCP)</strong>, <strong>Microsoft Fabric</strong>, and <strong>Power Automate</strong>, I focus on creating <strong>data-driven solutions</strong> that deliver measurable <strong>business impact</strong>. My passion lies in bridging the gap between <strong>raw data</strong> and <strong>decision-making</strong>, using advanced <strong>analytics</strong>, <strong>automation</strong>, and <strong>visualization</strong> to tell compelling <strong>data stories</strong>.</p>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/phaniaddepalli" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/galaxyinvader69" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="resume.pdf" class="fa-regular fa-file-pdf" target="_blank"></a>
+        <a href="mailto:phanivishnuaddepalli@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+
+      </div>
+    </div>
+  </section>
+   <script>
+    // Remove fade-out on page load
+    document.body.classList.remove('fade-out');
+
+    // Add fade-out when clicking any nav link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href !== '#') {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 500); // Duration matches CSS transition
+        }
+      });
+    });
+  </script>
+  <script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('header nav');
+
+  toggle.addEventListener('click', () => {
+    //nav.classList.toggle('show');
+  });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.querySelector('.typing-text span');
+  if (!el) return; // no typing block on this page
+
+  const lines = [
+    "I'm a Data Engineer",
+    "I'm a Data Analyst",
+    "I'm a Business Analyst",
+    "I'm a ML Engineer",
+    "I'm an AI Engineer"
+  ];
+  const TYPE_SPEED = 80, ERASE_SPEED = 45, HOLD_MS = 1000;
+  let i = 0, j = 0, typing = true, holdUntil = 0;
+
+  function tick(){
+    const now = Date.now();
+    if (now < holdUntil) return setTimeout(tick, 50);
+    const text = lines[i];
+
+    if (typing){
+      el.textContent = text.slice(0, ++j);
+      if (j === text.length){ typing = false; holdUntil = now + HOLD_MS; }
+      setTimeout(tick, TYPE_SPEED);
+    } else {
+      el.textContent = text.slice(0, --j);
+      if (j === 0){ typing = true; i = (i + 1) % lines.length; }
+      setTimeout(tick, ERASE_SPEED);
+    }
+  }
+  tick();
+});
+</script>
+<script src="transitions.js"></script>
+<!-- Put this just above </body> (and remove your old toggle code) -->
+<script>
+  (function () {
+    const nav = document.querySelector('header nav');
+    const toggle = document.querySelector('.menu-toggle');
+    if (!nav || !toggle) return;
+
+    // Open/close drawer + lock body scroll
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+      document.body.classList.toggle('no-scroll', nav.classList.contains('show'));
+    });
+
+    // Close drawer after tapping any nav link
+    nav.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        nav.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+      })
+    );
+  })();
+</script>
+</body>
+</html>

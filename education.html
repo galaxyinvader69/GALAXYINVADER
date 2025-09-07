@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+   <link rel="icon" type="" href="logos/favicon.png">
+  <title>Education - Phani</title>
+
+  <!-- Page-scoped overrides: stacked, auto-height horizontal cards -->
+  <style>
+    /* Centered page header — same look as Contact */
+    .education-page .page-head{
+      max-width:1200px;
+      margin:110px auto 18px;
+      padding:0 20px;
+      text-align:center;
+    }
+    .education-page .page-head h1{
+      font-size:clamp(2.4rem, 2rem + 2vw, 4rem);
+      color:#FF5F1F;
+      font-weight:700;
+      margin:0 0 8px;
+    }
+    .education-page .page-head .sub{
+      color:#cfcfcf;
+      font-size:1.4rem;
+      margin:0;
+    }
+
+    /* ====== HARD RESET just for the education cards ====== */
+    .eduH-wrap, .eduH-wrap * { box-sizing: border-box; }
+    .eduH-wrap * { min-height: 0 !important; }          /* nuke inherited min-heights */
+    .eduH-card { height: auto !important; min-height: 0 !important; overflow: visible !important; }
+
+    /* ====== Layout: one card after another, ends right after content ====== */
+    .eduH-wrap{
+      max-width: 1100px;
+      margin: 110px auto 60px;
+      padding: 0 20px;
+      display: block;                                     /* vertical flow */
+    }
+    .eduH-card{
+      background: linear-gradient(180deg,#121212,#0d0d0d);
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 20px 22px;
+      display: grid;                                      /* horizontal card */
+      grid-template-columns: 72px 1fr;                    /* logo | content */
+      column-gap: 16px;
+      align-items: start;
+      margin-bottom: 26px;                                /* space to the next card */
+    }
+    .eduH-card:last-of-type{ margin-bottom: 0; }
+
+    /* logo column */
+    .eduH-logo{
+      width: 72px; height: 72px;
+      border-radius: 12px;
+      background: white;
+      border: 1px solid rgba(255,255,255,.08);
+      display: grid; place-items: center;
+      overflow: hidden;
+    }
+    .eduH-logo img{ max-width: 74%; max-height: 74%; object-fit: contain; }
+
+    /* main column */
+    .eduH-main{ display: block; }
+
+    .eduH-head{ margin-bottom: 8px; }
+    .eduH-head h2{
+      margin: 0 0 4px 0;
+      font-size: clamp(2.0rem, 1.2rem + 1.2vw, 2.8rem);
+      line-height: 1.15;
+    }
+    .eduH-degree{ color:#FF5F1F; font-size: 1.45rem; }
+    .eduH-meta{ color:#cfcfcf; font-size: 1.35rem; margin-top: 2px; }
+    .eduH-meta b{ color:#fff; }
+
+    /* two content columns (coursework | highlights) */
+    .eduH-body{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 32px;
+      align-items: start;                                  /* keeps compact */
+    }
+    .eduH-col h3{
+      color: #FF5F1F; font-weight: 700; font-size: 1.6rem; margin: 2px 0 8px;
+    }
+    .eduH-list{ margin: 0; padding-left: 18px; }
+    .eduH-list li{
+      margin: 4px 0;
+      color: #eaeaea;
+      font-size: 1.5rem;
+      line-height: 1.55;
+    }
+
+    /* mobile: stack the body columns */
+    @media (max-width: 860px){
+      .eduH-card{ grid-template-columns: 56px 1fr; }
+      .eduH-logo{ width:56px; height:56px; }
+      .eduH-body{ grid-template-columns: 1fr; }
+    }
+    /* Force long metadata lines to wrap inside cards */
+
+
+
+    
+.eduH-meta {
+  white-space: normal !important;
+  word-break: break-word;       /* break long tokens if needed */
+  overflow-wrap: anywhere;      /* modern browsers */
+  max-width: 100%;              /* keep it inside the card */
+  line-height: 1.4;
+}
+
+/* Safety for the card container itself */
+.eduH-card {
+  overflow: hidden;             /* no text spilling out visually */
+}
+  </style>
+</head>
+<body class="education-page">
+
+  <header>
+    <a href="index.html" class="logo">Phani Vishnu Addepalli</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="education.html" class="active">Education</a>
+      <a href="experience.html">Experience</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
+  </header>
+
+  <main class="eduH-wrap">
+    <!-- CHANGED: use .page-head so CSS applies -->
+    <section class="page-head">
+      <h1>Education</h1>
+      <p class="sub">My Education and Key Achievements</p>
+    </section>
+
+    <!-- GMU -->
+    <article class="eduH-card">
+      <div class="eduH-logo">
+        <img src="logos/GWlogo.png" alt="George Washington University logo"/>
+      </div>
+
+      <div class="eduH-main">
+        <header class="eduH-head">
+          <h2>The George Washington University</h2>
+          <div class="eduH-degree">Masters in Data Science</div>
+          <div class="eduH-meta">2023 — 2025 · GPA: <b>3.91 / 4.0</b></div>
+        </header>
+
+        <section class="eduH-body">
+          <div class="eduH-col">
+            <h3>Selected Coursework</h3>
+            <ul class="eduH-list">
+              <li>Machine Learning</li>
+              <li>Big Data / PySpark</li>
+              <li>Data Warehousing</li>
+              <li>Data Visualization</li>
+              <li>Data Mining</li>
+              <li>Cloud Computing</li>
+              <li>Business Intelligence</li>
+            </ul>
+          </div>
+
+          <div class="eduH-col">
+            <h3>Highlights</h3>
+            <ul class="eduH-list">
+              <li><b>Global Leaders Award</b> Fellowship recipient — merit-based recognition for academic excellence.</li>
+              <li>Developed end-to-end analytics solutions, from data pipelines to stakeholder-ready insights.</li>
+              <li>Maintained <b>3.91 GPA</b> with strong performance in ML, visualization, and data engineering.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <!-- VIT -->
+    <article class="eduH-card">
+      <div class="eduH-logo">
+        <img src="logos/vit_logo.png" alt="Vellore Institute of Technology logo"/>
+      </div>
+
+      <div class="eduH-main">
+        <header class="eduH-head">
+          <h2>Vellore Institute of Technology</h2>
+          <div class="eduH-degree">B.Tech in Electronics &amp; Communication Engineering</div>
+          <div class="eduH-meta">2019 — 2023 · GPA: <b>3.5 / 4.0</b></div>
+        </header>
+
+        <section class="eduH-body">
+          <div class="eduH-col">
+            <h3>Selected Coursework</h3>
+            <ul class="eduH-list">
+              <li>Data Structures &amp; Algorithms</li>
+              <li>Microcontrollers &amp; Embedded Systems</li>
+              <li>Data Analytics &amp; Visualization</li>
+              <li>Digital Signal Processing</li>
+              <li>Data Structures &amp; Algorithms (C++/Java)</li>
+              <li>Analog &amp; Digital Communication</li>
+            </ul>
+          </div>
+
+          <div class="eduH-col">
+            <h3>Highlights</h3>
+            <ul class="eduH-list">
+              <li>Hands-on programming in C++, Java, Python, and SQL.</li>
+              <li>Mini-projects across ML, IoT, and embedded programming.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    // page fade
+    document.body.classList.remove('fade-out');
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href=a.getAttribute('href'); if(!href||href==='#') return;
+        e.preventDefault(); document.body.classList.add('fade-out');
+        setTimeout(()=>location.href=href, 300);
+      });
+    });
+    // mobile nav
+    document.querySelector('.menu-toggle')?.addEventListener('click',()=>{
+      document.querySelector('header nav')?.classList.toggle('show');
+    });
+  </script>
+  <script src="transitions.js"></script>
+  <!-- Put this just above </body> (and remove your old toggle code) -->
+<script>
+  (function () {
+    const nav = document.querySelector('header nav');
+    const toggle = document.querySelector('.menu-toggle');
+    if (!nav || !toggle) return;
+
+    // Open/close drawer + lock body scroll
+    toggle.addEventListener('click', () => {
+      //nav.classList.toggle('show');
+      document.body.classList.toggle('no-scroll', nav.classList.contains('show'));
+    });
+
+    // Close drawer after tapping any nav link
+    nav.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        nav.classList.remove('show');
+        document.body.classList.remove('no-scroll');
+      })
+    );
+  })();
+</script>
+</body>
+</html>

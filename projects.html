@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <link rel="icon" type="" href="logos/favicon.png">
+  <title>Projects - Phani</title>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <!-- Your site CSS -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Phani Vishnu Addepalli</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="education.html">Education</a>
+      <a href="experience.html">Experience</a>
+      <a href = "certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
+  </header>
+
+<div class="projects-shell">
+  <header class="projects-hero">
+    <h1>Projects</h1>
+    <p class="projects-sub">Explore my code and activity on GitHub</p>
+  </header>
+
+  <!-- Live GitHub panel (API-driven) -->
+  <section class="gh-panel" data-user="galaxyinvader69">
+    <div class="gh-header">
+      <img class="gh-avatar" src="" alt="GitHub avatar" />
+      <div class="gh-meta">
+        <h2 class="gh-name">Loading…</h2>
+        <div class="gh-username">@galaxyinvader69</div>
+        <div class="gh-stats">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="gh-repo-grid" id="gh-repos"></div>
+
+    <div class="gh-fallback" hidden>
+      Couldn’t load repos right now. See my
+      <a href="https://github.com/galaxyinvader69" target="_blank" rel="noopener">GitHub profile</a>.
+    </div>
+  </section>
+</div>
+
+<!-- GitHub API loader (no token needed for public data) -->
+<script>
+(() => {
+  const panel = document.querySelector('.gh-panel');
+  if (!panel) return;
+  const user = panel.dataset.user || 'galaxyinvader69';
+  const avatar = panel.querySelector('.gh-avatar');
+  const name = panel.querySelector('.gh-name');
+  const reposEl = document.getElementById('gh-repos');
+  const reposCount = panel.querySelector('.gh-repos');
+  const followers = panel.querySelector('.gh-followers');
+  const following = panel.querySelector('.gh-following');
+  const fallback = panel.querySelector('.gh-fallback');
+
+  // small helpers
+  const fmtDate = (iso) => new Date(iso).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'});
+  const escape = (s='') => s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  // 1) Load profile
+  fetch(`https://api.github.com/users/${user}`)
+    .then(r => r.json())
+    .then(d => {
+      if (!d || d.message) throw new Error(d && d.message || 'profile error');
+      avatar.src = d.avatar_url;
+      avatar.alt = `${d.name || d.login} avatar`;
+      name.textContent = d.name || d.login;
+      reposCount.textContent = d.public_repos ?? 0;
+      followers.textContent = d.followers ?? 0;
+      following.textContent = d.following ?? 0;
+    })
+    .catch(() => { /* silent; panel still useful */ });
+
+  // 2) Load repos (recently updated)
+  fetch(`https://api.github.com/users/${user}/repos?per_page=9&sort=updated`)
+    .then(r => r.json())
+    .then(list => {
+      if (!Array.isArray(list)) throw new Error('repo error');
+      if (list.length === 0) { fallback.hidden = false; return; }
+      reposEl.innerHTML = list.map(repo => `
+        <article class="gh-card">
+          <div class="gh-card-top">
+            <a class="gh-repo-name" href="${escape(repo.html_url)}" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> ${escape(repo.name)}
+            </a>
+            ${repo.fork ? '<span class="gh-badge">fork</span>' : ''}
+          </div>
+          ${repo.description ? `<p class="gh-desc">${escape(repo.description)}</p>` : '<p class="gh-desc gh-muted">No description</p>'}
+          <div class="gh-card-meta">
+            ${repo.language ? `<span class="pill">${escape(repo.language)}</span>` : ''}
+            <span class="pill"><i class="fa-regular fa-star"></i> ${repo.stargazers_count ?? 0}</span>
+            <span class="pill"><i class="fa-solid fa-code-branch"></i> ${repo.forks_count ?? 0}</span>
+          </div>
+        </article>
+      `).join('');
+    })
+    .catch(() => { fallback.hidden = false; });
+})();
+</script>
+
